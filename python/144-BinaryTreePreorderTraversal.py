@@ -6,29 +6,33 @@
 #         self.right = None
 
 class Solution(object):
-    def inorderTraversal(self, root):
+    def preorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
-        
+        '''
         if root == None:
             return []
-        
         stack = []
         p = root
         out = []
-        
-        while len(stack) > 0 or p != None:
-            # if p is not None, go to the left end
+        while stack or p != None:
             while p != None:
-                stack.append(p)
+                out.append(p.val)
+                if p.right != None:
+                    stack.append(p.right)
                 p = p.left
-            # set p to the frist element in stack,
-            # print, then go to the right child
             if stack:
                 p = stack.pop()
+        '''
+        stack = [root]
+        out = []
+        while stack:
+            p = stack.pop()
+            if p:
                 out.append(p.val)
-                p = p.right
+                stack.append(p.right)
+                stack.append(p.left)
         
         return out
